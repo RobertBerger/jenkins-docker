@@ -1,0 +1,2 @@
+JENKINS_WAR_VERSION="2.222.4"
+CONTAINER_NAME="jenkins-container"

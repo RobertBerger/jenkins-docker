@@ -33,3 +33,11 @@ Alternatively, you can clone this repository, build the image from the Dockerfil
 	    -v /var/run/docker.sock:/var/run/docker.sock \
 	    --restart unless-stopped \
 	    jenkins-docker
+
+### Plugin updates
+
+You can just update them via the web gui - persistant
+
+### jenkins.war update
+
+Added it to dockerfile
