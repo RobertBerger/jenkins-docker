@@ -16,15 +16,19 @@ rm -f jenkins.war.sha256
 wget http://mirrors.jenkins.io/war-stable/${JENKINS_WAR_VERSION}/jenkins.war.sha256
 
 if [ -f jenkins.war ]; then
-   echo "jenkins.war already exists - calculating the checksum"
+   echo "+ jenkins.war already exists - calculating the checksum"
    echo "$(cat jenkins.war.sha256)" | sha256sum --check --status
    if [ $? -eq 1 ]; then
       echo "+ rm -f jenkins.war"
       rm -f jenkins.war
-      echo "checksum error - downloading  http://mirrors.jenkins.io/war-stable/${JENKINS_WAR_VERSION}/jenkins.war"
+      echo "+ checksum error - downloading  http://mirrors.jenkins.io/war-stable/${JENKINS_WAR_VERSION}/jenkins.war"
       echo "+ wget http://mirrors.jenkins.io/war-stable/${JENKINS_WAR_VERSION}/jenkins.war"
       wget http://mirrors.jenkins.io/war-stable/${JENKINS_WAR_VERSION}/jenkins.war
    fi
+else
+   echo "+ downloading  http://mirrors.jenkins.io/war-stable/${JENKINS_WAR_VERSION}/jenkins.war"
+   echo "+ wget http://mirrors.jenkins.io/war-stable/${JENKINS_WAR_VERSION}/jenkins.war"
+   wget http://mirrors.jenkins.io/war-stable/${JENKINS_WAR_VERSION}/jenkins.war
 fi
 
 echo "$(cat jenkins.war.sha256)" | sha256sum --check --status
@@ -44,4 +48,12 @@ docker build --rm=true -t reslocal/${CONTAINER_NAME} .
 set +x
 popd
 
-rm -f ../usr/share/jenkins/*
+while true; do
+    read -p "Do you wish to kill the .war file and the sha256 checksum - for version control?" yn
+    case $yn in
+        [Yy]* ) rm -f ../usr/share/jenkins/*; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
