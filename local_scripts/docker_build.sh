@@ -10,6 +10,10 @@ then
     exit
 fi
 
+if [ ! -d ../usr/share/jenkis ]; then
+   mkdir -p ../usr/share/jenkins
+fi
+
 pushd ../usr/share/jenkins
 # let's get the checksum
 rm -f jenkins.war.sha256

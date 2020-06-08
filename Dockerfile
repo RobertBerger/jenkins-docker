@@ -33,6 +33,11 @@ RUN curl -o /usr/local/bin/repo https://storage.googleapis.com/git-repo-download
 ADD usr/share/jenkins/jenkins.war /usr/share/jenkins/jenkins.war
 # <-- rber new version of jenkins
 
+# --> rber bash instead of dash (ANSIcolor?)
+RUN echo "dash dash/sh boolean false" | debconf-set-selections
+RUN dpkg-reconfigure -f noninteractive dash
+# <-- rber bash instead of dash (ANSIcolor?)
+
 # --> rber sudo
 
 RUN apt-get install -y sudo

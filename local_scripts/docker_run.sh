@@ -39,8 +39,8 @@ sudo chmod 666 /var/run/docker.sock
 # start ash shell - need to start redis manually 
 #echo "+ ID=\$(docker run --cap-drop=all -t -i -d -p ${PUBLIC_PORT}:6379 ${IMAGE_NAME} ash -l)" 
 #ID=$(docker run --cap-drop=all -t -i -d -p ${PUBLIC_PORT}:6379 ${IMAGE_NAME} ash -l) 
-echo "+ docker pull ${IMAGE_NAME}"
-docker pull ${IMAGE_NAME}
+#echo "+ docker pull ${IMAGE_NAME}"
+#docker pull ${IMAGE_NAME}
 
 echo "+ ID=\$(docker run -t -i -d -p ${PUBLIC_WEB_PORT}:8080 -p ${PUBLIC_SLAVE_AGENT_PORT}:50000 -v /workdir:/workdir -v ${JENKINS_HOME_VOL}:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --restart unless-stopped ${IMAGE_NAME})"
 ID=$(docker run -t -i -d -p ${PUBLIC_WEB_PORT}:8080 -p ${PUBLIC_SLAVE_AGENT_PORT}:50000 -v /workdir:/workdir -v ${JENKINS_HOME_VOL}:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --restart unless-stopped ${IMAGE_NAME})
