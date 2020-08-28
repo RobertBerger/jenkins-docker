@@ -1,7 +1,7 @@
 if [ "$#" -ne 1 ]; then
     echo "Usage:"
     echo "./special_tag_push.sh <tag>"
-    echo "./special_tag_push.sh 2020-06-08-jenkins-2.222.4"
+    echo "./special_tag_push.sh ${BRANCH}"
     exit
 fi
 

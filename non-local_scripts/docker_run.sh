@@ -10,7 +10,7 @@ then
     echo "+ $0: Too few arguments!"
     echo "+ use something like:"
     echo "+ $0 <docker image:tag>" 
-    echo "+ $0 reliableembeddedsystems/${CONTAINER_NAME}:2020-06-08-jenkins-2.222.4"
+    echo "+ $0 reliableembeddedsystems/${CONTAINER_NAME}:${BRANCH}"
     exit
 fi
 
