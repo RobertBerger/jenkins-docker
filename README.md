@@ -41,3 +41,9 @@ You can just update them via the web gui - persistant
 ### jenkins.war update
 
 Added it to dockerfile
+
+### install on new machine - move old data
+
+it's in:
+
+/var/lib/docker/volumes/jenkins_home
