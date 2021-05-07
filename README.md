@@ -44,6 +44,79 @@ Added it to dockerfile
 
 ### install on new machine - move old data
 
+*) let jenkins start once and log in
+
+*) on master
+
+sudo bash
+
+cd /var/lib/docker/volumes/jenkins_home/_data
+
+tar czvf jobs.tar.gz jobs
+
+scp jobs.tar.gz <user>@<ip>:/tmp
+
+scp config.xml <user>@<ip>:/tmp
+
+*) on other machine
+
+sudo bash
+
+cd /var/lib/docker/volumes/jenkins_home/_data
+
+tar xvf /tmp/jobs.tar.gz
+
+cp /tmp/config.xml .
+
+====
+
+restart the container
+
 it's in:
 
 /var/lib/docker/volumes/jenkins_home
+
+### export/import jobs
+
+### all of them
+
+sudo bash
+
+cd /var/lib/docker/volumes/jenkins_home/_data
+
+jobs 
+
+copy this over to the new machine
+
+also copy the views over:
+
+cp /tmp/unzip/jenkins_home/_data/config.xml .
+
+
+
+#### get a shell into the new container
+
+docker exec -it 3b7c902c847b /bin/bash
+
+#### get command line jenkins
+
+jenkins@3b7c902c847b:/tmp$ cd /tmp
+jenkins@3b7c902c847b:/tmp$ wget http://192.168.42.1:8080/jnlpJars/jenkins-cli.jar
+--2020-12-23 18:22:26--  http://192.168.42.1:8080/jnlpJars/jenkins-cli.jar
+Connecting to 192.168.42.1:8080... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3139807 (3.0M) [application/java-archive]
+Saving to: ‘jenkins-cli.jar’
+
+jenkins-cli.jar                                 100%[=====================================================================================================>]   2.99M  --.-KB/s    in 0.02s   
+
+2020-12-23 18:22:26 (168 MB/s) - ‘jenkins-cli.jar’ saved [3139807/3139807]
+
+#### get a job
+
+java -jar jenkins-cli.jar -logger FINE -s http://192.168.42.1:8080 -auth admin:8eddd7f90dde439da0dec0a4f7ae1a1a get-job am335x-phytec-wega-wic > am335x-phytec-wega-wic.xml
+
+### 
+
+
+
