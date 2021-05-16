@@ -110,6 +110,14 @@ cp /tmp/unzip/jenkins_home/_data/config.xml .
 docker exec -it 3b7c902c847b /bin/bash
 ```
 
+
+#### in the new shell get password
+
+```
+cat /var/jenkins_home/secrets/initialAdminPassword
+
+```
+
 #### get command line jenkins
 
 ```
